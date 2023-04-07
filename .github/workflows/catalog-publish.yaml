@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch: {}
+  schedule:
+  - cron: '0 1 * * *' # '15 * * * *'
+  push:
+    branches: [ main ]
+
+name: publish-the-catalog
+
+jobs:
+  pull-task:
+  
