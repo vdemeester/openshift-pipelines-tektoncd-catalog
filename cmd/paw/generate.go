@@ -57,6 +57,16 @@ func generateDirectoryCatalog(source, dest, externalTaskConfig string) error {
 	if err != nil {
 		return err
 	}
+	// TODO: prepare the "dest" workspace
+	//       (fetch the repository's `p` branch, …)
+	// TODO: fetch release assets
+	//       - fetch yamls
+	//       - fetch tests (yamls with kttl)
+	//       - fetch bundles, sbom, …
+	// TODO: extract in destination folder
+	// TODO: copy source/ to dest/ as well
+	//       (warn if there is conflicts)
+	// TODO: create a PR
 	resources, err := mapReleasedTasks(ghclient, c)
 	if err != nil {
 		return err
@@ -96,6 +106,10 @@ func mapReleasedTasks(ghclient api.RESTClient, c config.Config) (resources, erro
 			// FIXME: update this..
 			// For now, we start with just fetching the application/x-yaml at the right place
 			// Long term, this is going to be way more involved
+			// - Find yamls
+			// - Find tests (required)
+			// - Find bundle(s)
+			// - Find attestation / sbom / signatures
 			for _, a := range v.Assets {
 				if a.ContentType != "application/x-yaml" {
 					fmt.Fprintf(os.Stderr, "%s's asset %s ignored, not a yaml file\n", repo, a.Name)
